@@ -211,7 +211,7 @@ export default {
     },
     async syncEditAwards () {
       // this.savedAwards = await getJsonDocument('data/awards.json', {});
-      this.savedAwards = (await import('../../data/references/awards.js')).default;
+      this.savedAwards = (await import('../../references/awards.js')).default;
       this.editAwards = await getJsonDocument(
         `${this.resourceCachePath}/edit-awards.json`,
         {}
@@ -308,8 +308,8 @@ export default {
           return Promise.all(Object.keys(group).map(async key => {
             if (!key.match(/\d/)) {
               const filename = `${slug(award.name)}-${index}-${key}.${group[key].split('.').slice(-1)[0]}`;
-              const saveTo = `data/references/images/${filename}`;
-              await downloadImage(group[key], saveTo);
+              const saveTo = `images/${filename}`;
+              await downloadImage(group[key], `references/${saveTo}`);
               group[key] = saveTo;
             }
           }));

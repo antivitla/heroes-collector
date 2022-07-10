@@ -15,7 +15,9 @@ export default {
   },
   computed: {
     awardImageList () {
-      return this.modelValue.map(name => Awards.map[name].images[0]?.main);
+      return this.modelValue.map(name => {
+        return `references/${Awards.map[name].images[0]?.main}`;
+      });
     }
   }
 }

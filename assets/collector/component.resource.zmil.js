@@ -141,6 +141,7 @@ export default {
       this.editHeroes = this.cards.list.reduce((editHeroes, { name, photo, poster, url, id }) => {
         const editHero = { name, photo, poster, url, id };
         const existingHero = this.getExistingHeroByCard(editHero);
+        console.log(existingHero, editHero, id);
         editHeroes[editHero.id] = Object.assign(
           editHero,
           clone(existingHero || {}),

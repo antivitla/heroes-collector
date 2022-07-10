@@ -1,8 +1,8 @@
-import ranks from '../../data/references/ranks.js';
-import awards from '../../data/references/awards.js';
-import months from '../../data/references/months.js';
-import maleNames from '../../data/references/male-names.js';
-import femaleNames from '../../data/references/female-names.js';
+import ranks from '../../references/ranks.js';
+import awards from '../../references/awards.js';
+import months from '../../references/months.js';
+import maleNames from '../../references/male-names.js';
+import femaleNames from '../../references/female-names.js';
 
 export const Ranks = {
   map: ranks,
