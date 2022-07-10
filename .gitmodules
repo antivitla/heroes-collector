@@ -1,3 +1,6 @@
 [submodule "heroes-list"]
 	path = heroes-list
 	url = git@github.com:antivitla/heroes-list.git
+[submodule "references"]
+	path = references
+	url = git@github.com:antivitla/references.git
