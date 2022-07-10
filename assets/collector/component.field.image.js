@@ -21,7 +21,7 @@ export default {
             <div
               :class="{ 'image-saved': isSaved(url) }"
               :title="getDisplayTitle(url)">
-              <img :src="url">
+              <img :src="getImageUrl(url)">
             </div>
             <input type="radio" :value="url" v-model="editField">
           </label>
@@ -46,14 +46,19 @@ export default {
     },
   },
   computed: {
-    imageUrl () { return this.modelValue; },
+    imageUrl () {
+      return this.modelValue.match(/^images/) ? `heroes-list/${this.modelValue}` : this.modelValue;
+    },
     filteredOptions () {
       return this.options.filter(option => option !== this.modelValue);
     }
   },
   methods: {
     isSaved (url) {
-      return String(url)?.match(/^data\//);
+      return String(url)?.match(/^(data|images)\//);
+    },
+    getImageUrl (url) {
+      return url.match(/^images/) ? `heroes-list/${url}` : url;
     },
     getDisplayTitle (url) {
       const isSelected = url === this.modelValue;

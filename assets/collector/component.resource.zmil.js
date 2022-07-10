@@ -172,7 +172,7 @@ export default {
           existingHero.resources.zmil.id = card.id;
         }
       });
-      return await saveJsonDocument(`data/heroes-list.json`, this.heroesList);
+      return await saveJsonDocument(`heroes-list/heroes-list.json`, this.heroesList);
     },
     async actionSaveImages () {
       this.actionResult = '';
@@ -191,11 +191,11 @@ export default {
           callback: ({ index, key, saveTo }) => {
             // const name = cardList[index].name;
             const id = cardList[index].id;
-            this.editHeroes[id][key] = saveTo;
+            this.editHeroes[id][key] = saveTo.replace(/^heroes-list/, '');
             // this.editHeroes[name][key] = saveTo;
             this.progress.done += 1;
           },
-          pathSaveTo: 'data/images'
+          pathSaveTo: 'heroes-list/images'
         }).then(errors => errors.forEach(console.error));
         await this.setCachedEditHeroes();
         this.progress.active = false;
@@ -295,10 +295,10 @@ export default {
       this.actionResult = 'Сохранено';
     },
     isSavedImage (imageUrl) {
-      return /^data\//.test(imageUrl);
+      return /^(data|heroes-list)\//.test(imageUrl);
     },
     getExistingHeroByCard (card) {
-      const fallbackId = `data/images/${card.photo.split('/').slice(-1)[0]}`;
+      const fallbackId = `images/${card.photo.split('/').slice(-1)[0]}`;
       return this.getHeroById(card.id, 'zmil') || this.getHeroById(fallbackId, 'zmil');
     },
   }

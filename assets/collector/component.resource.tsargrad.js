@@ -196,12 +196,16 @@ export default {
         // Перенести фотки
         await Promise.all(
           ['photo'].map(async field => {
-            if (hero[field] && !hero[field].match(/^data\/images/)) {
+            if (hero[field] && !hero[field].match(/^images\//)) {
               const from = hero[field];
               const filename = from.split('/').slice(-1)[0];
-              const to = `data/images/${filename}`;
+              const to = `images/${filename.toLowerCase()}`;
               hero[field] = to;
-              await copyFile(from, to);
+              try {
+                await copyFile(from, `heroes-list/${to}`);
+              } catch (error) {
+                console.log(error);
+              }
             }
           })
         );

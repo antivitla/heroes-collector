@@ -240,7 +240,7 @@ export default {
           existingHero.resources[this.resourceKey].id = card.id;
         }
       });
-      await saveJsonDocument(`data/heroes-list.json`, this.heroesList);
+      await saveJsonDocument(`heroes-list/heroes-list.json`, this.heroesList);
       this.actionResult = 'Добавлено';
     },
     async actionRecognizeHeroNames () {
@@ -316,14 +316,19 @@ export default {
     //
 
     isSavedImage (imageUrl) {
-      return /^data\//.test(imageUrl);
+      return /^(data|images)\//.test(imageUrl);
     },
-    getAvatarStyle (url) {
+    getAvatarStyle (url = '') {
       return {
-        'background-image': `url("${url}")`,
+        'background-image': `url("${
+          url.match(/^images\//) ? `heroes-list/${url}` : url
+        }")`,
         'background-size': 'cover',
         'background-position': 'center top',
       };
+    },
+    getImageUrl (url = '') {
+      return url.match(/^images\//) ? `heroes-list/${url}` : url;
     },
     onSearchHero (event) {
       clearTimeout(this.timeoutSearchHero);

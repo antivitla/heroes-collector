@@ -93,11 +93,13 @@ export default {
     },
     getAvatarStyle (url) {
       return {
-        'background-image': `url("${String(url)}")`
+        'background-image': `url("${
+          String(url).match(/^images/) ? `heroes-list/${String(url)}` : String(url)
+        }")`
       };
     },
     isSaved (url) {
-      return String(url)?.match(/^data\//gi);
+      return String(url)?.match(/^(data|images)\//gi);
     },
     getDisplayTitle (url) {
       const isSelected = url === this.selectedPhoto;

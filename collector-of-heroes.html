@@ -14,14 +14,14 @@
 
   <header>
     <h1>Собиратель героев</h1>
-    <p>Инструмент сбора и подготовки информации о героях специальной военной операции&nbsp;Z в формате JSON с доступом к ней любому желающему. Результат будет в <a href="data/heroes.json" target="_blank">data/heroes.json</a></p>
+    <p>Инструмент сбора и подготовки информации о героях специальной военной операции&nbsp;Z в формате JSON с доступом к ней любому желающему. Результат будет в <a href="heroes-list/heroes-list.json" target="_blank">heroes-list/heroes-list.json</a></p>
   </header>
 
   <p>Формат хранилища:</p>
 
   <ul>
-    <li>Временные файлы работы загрузки и обработки данных &mdash; группировка по источнику (например, Cайт Минобороны z.mil.ru, Телеграм канал "Работаем, брат!", Сайт warheroes, Википедия/Megabook, и т.д.) в <strong>data/sources/*</strong></li>
-    <li>Финальный результат сборки в <strong>data/heroes.json</strong> с картинками в <strong>data/images/*</strong>.</li>
+    <li>Временные файлы работы загрузки и обработки данных &mdash; группировка по источнику (например, Cайт Минобороны z.mil.ru, Телеграм канал "Работаем, брат!", Сайт warheroes, Википедия/Megabook, и т.д.) в <strong>data/resource/*</strong></li>
+    <li>Финальный результат сборки в <strong>heroes-list/heroes-list.json</strong> с картинками в <strong>heroes-list/images/*</strong>.</li>
   </ul>
 
   <main id="app">
@@ -92,7 +92,7 @@
               { key: 'briefings', label: 'Брифинги', sublabel: 'z.mil.ru', notHeroResource: true, group: 'right' },
               // Специальные
               // { key: 'awards', label: 'Награды', sublabel: 'wikipedia.org', group: 'right' },
-              { key: 'heroes', label: 'Проверка', sublabel: 'heroes.json', notHeroResource: true, group: 'right' }
+              { key: 'heroes', label: 'Проверка', sublabel: 'heroes-list.json', notHeroResource: true, group: 'right' }
             ],
             current: location.hash.replace('#', '') || 'zmil'
           },
@@ -131,12 +131,10 @@
       },
       methods: {
         async getHeroes () {
-          // this.heroes = await getJsonDocument('data/heroes.json');
-          this.heroesList = await getJsonDocument('data/heroes-list.json');
+          this.heroesList = await getJsonDocument('heroes-list/heroes-list.json');
         },
         async saveHeroes () {
-          // await saveJsonDocument('data/heroes.json', this.heroes);
-          await saveJsonDocument('data/heroes-list.json', this.heroesList);
+          await saveJsonDocument('heroes-list/heroes-list.json', this.heroesList);
         },
         async createHero (name) {
           // Если подобное имя уже есть, мы должны решить
@@ -206,7 +204,7 @@
   <!-- Утилиты для консоли -->
   <script>
     window.COHGetHeroesList = async function () {
-      return await fetch('data/heroes-list.json').then(result => result.json());
+      return await fetch('heroes-list/heroes-list.json').then(result => result.json());
     }
 
     window.COHFilterByResource = async function (resource) {

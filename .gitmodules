@@ -1,0 +1,3 @@
+[submodule "heroes-list"]
+	path = heroes-list
+	url = https://github.com/antivitla/heroes-list.git

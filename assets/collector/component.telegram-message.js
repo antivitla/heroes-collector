@@ -86,7 +86,7 @@ export default {
       return typeof this.card.photo === 'string' ? this.card.photo : '';
     },
     isSaved () {
-      return typeof this.card.photo === 'string' && this.card.photo.match(/^data\//);
+      return typeof this.card.photo === 'string' && this.card.photo.match(/^(data|images)\//);
     },
   }
 }

@@ -92,7 +92,7 @@ export default {
                   <img
                     v-if="field === 'poster'"
                     class="check-hero__poster"
-                    :src="value">
+                    :src="getImageUrl(value)">
                   <a
                     :href="value"
                     target="_blank"
@@ -228,18 +228,18 @@ export default {
 
     async actionAddAncestorId () {
       this.actionResult = '';
-      const list = await getJsonDocument('data/heroes-list.json', {});
+      const list = await getJsonDocument('heroes-list/heroes-list.json', {});
       list.forEach(hero => {
         if (hero.resources.ancestor) {
           hero.resources.ancestor.id = hero.resources.ancestor.url;
         }
       });
-      await saveJsonDocument('data/heroes-list.json', list);
+      await saveJsonDocument('heroes-list/heroes-list.json', list);
       this.actionResult = 'Добавлено';
     },
     async renameModRussia () {
       this.actionResult = '';
-      const list = await getJsonDocument('data/heroes-list.json', {});
+      const list = await getJsonDocument('heroes-list/heroes-list.json', {});
       list.forEach(hero => {
         const mod_russia = hero.resources.mod_russia;
         if (mod_russia) {
@@ -247,7 +247,7 @@ export default {
           hero.resources['telegram.mod_russia'] = mod_russia;
         }
       });
-      await saveJsonDocument('data/heroes-list.json', list);
+      await saveJsonDocument('heroes-list/heroes-list.json', list);
       this.actionResult = 'Переименовали';
     }
   }

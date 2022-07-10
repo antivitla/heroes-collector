@@ -379,17 +379,17 @@ export default {
         // Перенести все фотки
         await Promise.all(
           ['photo', 'ancestorPoster', 'zmilPoster'].map(async field => {
-            if (hero[field] && typeof hero[field] === 'string' && !hero[field].match(/^data\/images/)) {
+            if (hero[field] && typeof hero[field] === 'string' && !hero[field].match(/^images\//)) {
               if (hero[field].match(/data:image\/[^;]*;base64/)) {
                 console.warn('Base64 field', field);
                 return;
               }
               const from = hero[field];
               const filename = from.split('/').slice(-1)[0];
-              const to = `data/images/${filename}`;
+              const to = `images/${filename.toLowerCase()}`;
               hero[field] = to;
               try {
-                await copyFile(from, to);
+                await copyFile(from, `heroes-list/${to}`);
               } catch (error) {
                 console.log(error);
               }

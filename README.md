@@ -33,15 +33,3 @@
 **Поднимаем локально**
 
 Поднимать локальный сервер через `docker-compose up` (Docker), так как требуется PHP при разработке. Для дистрибутива PHP не нужен.
-
-**Положить на сервер**
-
-`scp -r data/images [username]@h18.netangels.ru:mr-woodman.ru/www/heroes/data/`
-`scp -r data/heroes-list.json [username]@h18.netangels.ru:mr-woodman.ru/www/heroes/data/`
-`scp -r data/.htaccess [username]@h18.netangels.ru:mr-woodman.ru/www/heroes/data/`
-
-## TODO
-
-- Парсить текст на предмет:
-  - награды
-  - теги обстоятельств
