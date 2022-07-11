@@ -288,6 +288,12 @@ export default {
       this.editHeroes = {};
       await this.setCachedEditHeroes();
     },
+    async clearCards () {
+      this.cards = this.createInitialCards();
+      this.allCards = this.createInitialAllCards();
+      await this.setCachedCards();
+      await this.setCachedAllCards();
+    },
 
     //
     // Create initial

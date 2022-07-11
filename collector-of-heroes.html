@@ -35,7 +35,6 @@
         :heroes-list="heroesList"
         :channel="currentResourceChannel"
         :channel-title="currentResourceChannelTitle"
-        @create-hero="createHero"
         @update-heroes="updateHeroes"
       ></component>
     </keep-alive>
@@ -49,8 +48,8 @@
     import ComponentSelector from './assets/collector/component.selector.js';
     import ComponentModals from './assets/collector/component.modals.js';
 
-    import ComponentResourceZmil from './assets/collector/component.resource.zmil.js';
-    import ComponentResourceZmilNew from './assets/collector/component.resource.zmil-new.js';
+    // import ComponentResourceZmil from './assets/collector/component.resource.zmil.js';
+    import ComponentResourceZmil from './assets/collector/component.resource.zmil-new.js';
     import ComponentResourceWarheroes from './assets/collector/component.resource.warheroes.js';
     import ComponentResourceTsargrad from './assets/collector/component.resource.tsargrad.js';
     import ComponentResourceKontingent from './assets/collector/component.resource.kontingent.js';
@@ -66,7 +65,7 @@
         ComponentSelector,
         ComponentModals,
         ComponentResourceZmil,
-        ComponentResourceZmilNew,
+        // ComponentResourceZmilNew,
         ComponentResourceWarheroes,
         ComponentResourceTsargrad,
         ComponentResourceKontingent,
@@ -80,8 +79,8 @@
         return {
           resource: {
             tabs: [
+              // { key: 'zmil', label: 'Герои Z', sublabel: 'z.mil.ru' },
               { key: 'zmil', label: 'Герои Z', sublabel: 'z.mil.ru' },
-              { key: 'zmil-new', label: 'Герои Z (2)', sublabel: 'z.mil.ru' },
               { key: 'warheroes', label: 'Герои России', sublabel: 'warheroes.ru' },
               { key: 'tsargrad', label: 'Наши герои', sublabel: 'ug.tsargrad.tv' },
               { key: 'kontingent', label: 'Герои Z', sublabel: 'kontingent.press' },
@@ -123,7 +122,16 @@
           return this.resource.tabs.find(tab => this.resource.current === tab.key).label;
         },
         allResourcesKeys () {
-          return this.resource.tabs.filter(tab => !tab.notHeroResource).map(tab => tab.key);
+          return [
+            'zmil',
+            'warheroes',
+            'tsargrad',
+            'kontingent',
+            'telegram.rabotaembrat',
+            'telegram.zakharprilepin',
+            'telegram.mod_russia'
+          ];
+          // return this.resource.tabs.filter(tab => !tab.notHeroResource).map(tab => tab.key);
         }
       },
       async created () {
@@ -135,33 +143,6 @@
         },
         async saveHeroes () {
           await saveJsonDocument('heroes-list/heroes-list.json', this.heroesList);
-        },
-        async createHero (name) {
-          // Если подобное имя уже есть, мы должны решить
-          // отменить ли создание или все-таки создать однофамильца.
-          // Он, впрочем, должен бы в итоге как-то отличаться...
-          // Мы, значит, должны предоставить опознавательную информацию
-          // об уже существующем герое, чтобы пользователь решил, тот же
-          // это или нет.
-          // const heroes = this.getHeroes({ name });
-          // const confirmed = !heroes.length || await this.openConfirm({
-          //   header: 'Такое имя уже есть'
-          //   body: heroes.map(hero => {
-          //     const links = ['zmil', 'warheroes', 'tsargrad', 'kontingent']
-          //       .map(src => {
-          //         return hero[src]?.url
-          //           ? `<a href="${hero[src]?.url}" target="_blank">${hero[src]?.url}</a>`
-          //           : '';
-          //       }).filter(item => item);
-          //     return `<p>${hero.name}, ${hero.rank}, ${links.join(', ')}</p>`;
-          //   });
-          // });
-
-          // if (confirmed) {
-          //   this.heroesList.push({ name })
-          // }
-          // await this.saveHeroes();
-          console.log('create hero', name);
         },
         async updateHeroes (update) {
           update.list.forEach((hero, i) => {

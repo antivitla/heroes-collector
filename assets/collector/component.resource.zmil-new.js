@@ -332,6 +332,7 @@ export default {
         'add-id': this.actionAddId,
         'clear-edit-heroes': () => {
           this.clearEditHeroes();
+          this.clearCards();
           this.generalActionResult = 'Очищено';
         }
       })[action]();
